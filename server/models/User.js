@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+
   lastName: {
     type: String,
     required: true,
@@ -21,6 +22,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+    trim: true,
   },
 
   accountType: {
@@ -39,10 +41,18 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Course",
   },
-  
+
   image: {
     type: String,
     required: true,
+  },
+
+  token: {
+    type: String,
+  },
+
+  resetPasswordExpires {
+    type: Date,
   },
 
   courseProgress: [

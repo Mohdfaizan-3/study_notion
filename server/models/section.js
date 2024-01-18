@@ -4,6 +4,7 @@ const sectionSchema = new mongoose.Schema({
   section: {
     type: String,
   },
+  
   subSection: [
     {
       type: mongoose.Schema.Types.ObjectId,
