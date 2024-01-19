@@ -33,16 +33,14 @@ exports.sendOtp = async (req, res) => {
         specialChars: false,
       });
       result = await Otp.findOne({ otp: otp });
-
-      const otpPayload = { email, otp };
-
-      const otpBody = await Otp.create(otpPayload);
-      console.log(otpBody);
-      res.status(200).json({
-        success: true,
-        message: "Otp send successfully",
-      });
     }
+
+    const otpPayload = { email, otp };
+    const otpBody = await Otp.create(otpPayload);
+    return res.status(200).json({
+      success: true,
+      message: "Otp send successfully",
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -120,6 +118,7 @@ exports.signUp = async (req, res) => {
       about: null,
       contactNumber: null,
     });
+
     const user = await User.create({
       firstName,
       lastName,
@@ -127,7 +126,7 @@ exports.signUp = async (req, res) => {
       password: hashedPassword,
       accountType,
       additionalDetails: profileDetails._id,
-      image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
+      image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName}${lastName}`,
     });
 
     return res.status(200).json({
@@ -150,6 +149,7 @@ exports.signUp = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    
     if (!email || !password) {
       return res.status(403).json({
         success: false,
@@ -204,6 +204,6 @@ exports.login = async (req, res) => {
 
 //change Password
 
-exports.changePassword = async (req, res) = {
+// exports.changePassword = async (req, res) = {
 
-}
+// }
